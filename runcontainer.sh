@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -it -d -p 3000:80 -v $(pwd)/sample-data/inventories/production:/inventories/production -v $(pwd)/sample-data/inventories/staging:/inventories/staging -v $(pwd)/sample-data/provision:/servers-provision-playbook -v $(pwd)/sample-data/deployment:/code-deployment-playbook -v $(pwd)/sample-data/keys:/access-keys/production -v $(pwd)/sample-data/keys:/access-keys/staging --name deployment antonienko/antksilextrano

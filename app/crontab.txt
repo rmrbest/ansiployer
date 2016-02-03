@@ -1,0 +1,1 @@
+*/5 * * * * /playbooks/execute.sh >> /var/log/deploycron.log 2>&1
