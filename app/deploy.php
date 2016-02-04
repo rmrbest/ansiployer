@@ -11,15 +11,29 @@
 $environment = isset($_GET['env']) ? $_GET['env']: 'staging';
 
 $pidfile = 'deploy.pid';
-$cmd = "ansible-galaxy install -r /playbook/requirements.yml -p /roles;ansible-playbook -i /playbook/$environment /playbook/deploy.yml -vvvv";
-$outputfile = 'log/deploy.log';
+$log_file = 'log/deploy.log';
+
 if (!isRunning($pidfile)) {
-    echo "executing\n$cmd\n";
-    exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile));
+    echo "executing\n";
+    installRoles($log_file, $pidfile);
+    deploy($environment, $log_file, $pidfile);
 } else {
     echo "already running";
-    echo file_get_contents($outputfile);
 }
+
+function installRoles($logFile, $pidFile)
+{
+    $cmd = 'ansible-galaxy install -r /playbook/requirements.yml -p /roles';
+    exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
+}
+
+function deploy($environment, $logFile, $pidFile)
+{
+    $cmd = "ansible-playbook -i /playbook/$environment /playbook/deploy.yml";
+    exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
+}
+
+
 
 function isRunning($pidfile){
     if (file_exists($pidfile)) {
