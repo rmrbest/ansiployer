@@ -1,3 +1,3 @@
 # ansiployer
 
-Containerized web application to managed your application deploys with ansible
+Containerized web application to manage web application deploys with ansible
