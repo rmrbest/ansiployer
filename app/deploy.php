@@ -8,15 +8,19 @@
 //    fwrite($file, $execution_date);
 //    fclose($file);
 //}
-$environment = isset($_GET['env']) ? $_GET['env']: 'staging';
+$environment = isset($_GET['env']) ? $_GET['env'] : 'staging';
 
-$pidfile = 'deploy.pid';
+$pidroles = 'roles.pid';
+$piddeploy = 'deploy.pid';
 $log_file = 'log/deploy.log';
 
-if (!isRunning($pidfile)) {
+if (!isRunning($piddeploy) && !isRunning($pidroles)) {
     echo "executing\n";
-    installRoles($log_file, $pidfile);
-    deploy($environment, $log_file, $pidfile);
+    installRoles($log_file, $piddeploy);
+    while (isRunning($pidroles)) {
+        sleep(1);
+    }
+    deploy($environment, $log_file, $piddeploy);
 } else {
     echo "already running";
 }
@@ -34,18 +38,19 @@ function deploy($environment, $logFile, $pidFile)
 }
 
 
-
-function isRunning($pidfile){
+function isRunning($pidfile)
+{
     if (file_exists($pidfile)) {
         $pid = file_get_contents($pidfile);
-        try{
+        try {
             $result = shell_exec(sprintf("ps %d", $pid));
-            if( count(preg_split("/\n/", $result)) > 2){
+            if (count(preg_split("/\n/", $result)) > 2) {
                 return true;
             } else {
                 unlink($pidfile);
             }
-        }catch(Exception $e){}
+        } catch (Exception $e) {
+        }
     }
     return false;
 }
