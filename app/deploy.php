@@ -12,7 +12,7 @@ $environment = isset($_GET['env']) ? $_GET['env']: 'staging';
 
 $pidfile = 'deploy.pid';
 $cmd = "ansible-galaxy install -r /playbook/requirements.yml -p /roles;ansible-playbook -i /playbook/$environment /playbook/deploy.yml -vvvv";
-$outputfile = '/deploylog/deploy.log';
+$outputfile = 'log/deploy.log';
 if (!isRunning($pidfile)) {
     echo "executing\n$cmd\n";
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile));
