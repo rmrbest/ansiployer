@@ -22,6 +22,4 @@ RUN chown -Rf www-data.www-data /usr/share/nginx/html
 RUN chmod -R 755 /usr/share/nginx/html/log
 RUN chown -Rf www-data.www-data /var/www
 
-#RUN crontab /usr/share/nginx/html/crontab.txt
-
 WORKDIR /usr/share/nginx/html
