@@ -19,6 +19,8 @@ if (!isRunning($piddeploy) && !isRunning($pidroles)) {
     installRoles($log_file, $piddeploy);
     while (isRunning($pidroles)) {
         sleep(1);
+        echo 'waiting';
+        ob_flush();
     }
     deploy($environment, $log_file, $piddeploy);
 } else {
