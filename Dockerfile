@@ -12,7 +12,6 @@ RUN mkdir /roles
 RUN chown -Rf www-data.www-data /roles
 RUN ansible-galaxy install carlosbuenosvinos.ansistrano-deploy carlosbuenosvinos.ansistrano-rollback
 
-VOLUME /deploylog
 VOLUME /playbook
 
 RUN mkdir /code
@@ -20,6 +19,7 @@ RUN chown -Rf www-data.www-data /code
 
 COPY ./app /usr/share/nginx/html
 RUN chown -Rf www-data.www-data /usr/share/nginx/html
+RUN chmod -R 755 /usr/share/nginx/html/log
 RUN chown -Rf www-data.www-data /var/www
 
 #RUN crontab /usr/share/nginx/html/crontab.txt
