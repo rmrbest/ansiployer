@@ -22,4 +22,6 @@ RUN chown -Rf www-data.www-data /usr/share/nginx/html
 RUN chmod -R 755 /usr/share/nginx/html/log
 RUN chown -Rf www-data.www-data /var/www
 
+RUN echo "www-data ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+
 WORKDIR /usr/share/nginx/html
