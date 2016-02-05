@@ -27,13 +27,13 @@ if (!isRunning($piddeploy) && !isRunning($pidroles)) {
 
 function installRoles($logFile, $pidFile)
 {
-    $cmd = 'ansible-galaxy install -r /playbook/requirements.yml -p /roles';
+    $cmd = 'ansible-galaxy install -r /playbook/requirements.yml -p /roles &';
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
 }
 
 function deploy($environment, $logFile, $pidFile)
 {
-    $cmd = "ansible-playbook -i /playbook/$environment /playbook/deploy.yml";
+    $cmd = "ansible-playbook -i /playbook/$environment /playbook/deploy.yml &";
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
 }
 
