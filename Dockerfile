@@ -1,27 +1,28 @@
-FROM richarvey/nginx-php-fpm
+FROM skiychan/nginx-php7
 MAINTAINER Antonio Hernández "antonio.hernandez@panamedia.net"
 
 #Install ansible
-RUN apt-get update && apt-get install -y software-properties-common && \
-    apt-add-repository ppa:ansible/ansible && \
-    apt-get update && apt-get install -y ansible
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm && \
+    yum -y update && \
+    yum -y install ansible
 
 #Install ansistrano
 COPY ./ansible.cfg /etc/ansible/ansible.cfg
 RUN mkdir /roles
-RUN chown -Rf www-data.www-data /roles
+RUN chown -Rf www.www /roles
 RUN ansible-galaxy install carlosbuenosvinos.ansistrano-deploy carlosbuenosvinos.ansistrano-rollback
 
 VOLUME /playbook
 
 RUN mkdir /code
-RUN chown -Rf www-data.www-data /code
+RUN chown -Rf www.www /code
 
-COPY ./app /usr/share/nginx/html
-RUN chown -Rf www-data.www-data /usr/share/nginx/html
-RUN chmod -R 755 /usr/share/nginx/html/log
-RUN chown -Rf www-data.www-data /var/www
+COPY ./app /data/www
+RUN chmod -R 755 /data/www/log
 
-RUN echo "www-data ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+COPY nginx.conf /usr/local/nginx/conf/nginx.conf
+#RUN chown -Rf www.www /var/www
 
-WORKDIR /usr/share/nginx/html
+#RUN echo "www ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+
+WORKDIR /data/www

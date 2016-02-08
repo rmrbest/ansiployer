@@ -1,0 +1,5 @@
+---
+- name: Test deployment
+- hosts: localhost
+  tasks:
+    - debug
