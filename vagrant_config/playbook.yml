@@ -1,0 +1,11 @@
+---
+- name: test
+  hosts: localhost
+  become: yes
+  become_user: root
+  roles:
+    - kei-yamazaki.docker
+  tasks:
+    - name: stop nginx
+      service: name=nginx state=stopped
+
