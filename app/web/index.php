@@ -1,10 +1,15 @@
 <?php
-require_once '../vendor/autoload.php';
-$app = new Silex\Application();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-$app->get('/deploy/{environment}', function ($environment) {
-    return 'estoy deployando';
-})->assert('environment', '[staging|production]');
+require_once '../vendor/autoload.php';
+use Ansiployer\Controller\Provider\Deploy;
+
+$app = new Silex\Application();
+$app['debug'] = true;
+
+$app->mount('/deploy', new Deploy());
 
 $app->get('/', function() {
     return 'List of available methods

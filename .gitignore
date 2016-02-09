@@ -1,6 +1,3 @@
 .idea
-sample-data/keys/*
-sample-data/inventories/production/*
-!sample-data/inventories/production/README.md
-sample-data/inventories/staging/*
-!sample-data/inventories/staging/README.md
+.vagrant
+app/vendor
