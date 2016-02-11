@@ -1,3 +1,6 @@
 .idea
 .vagrant
 app/vendor
+app/assets/*
+app/tests/integration/sandbox/*
+!app/tests/integration/sandbox/README.md

@@ -11,3 +11,4 @@ $app->register(new \Amqp\Silex\Provider\AmqpServiceProvider(), [
         ],
     ]
 ]);
+$app->register(new \Silex\Provider\ServiceControllerServiceProvider());

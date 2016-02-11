@@ -17,7 +17,7 @@ class Deploy implements ControllerProviderInterface {
         $deploy_routing->value('environment', 'staging');
         $deploy_routing->before($this->checkInventory());
 
-        $deploy_routing->get('/{environment}', 'Ansiployer\\Controller\\DeployController::list');
+        $deploy_routing->get('/{environment}', 'deploy.controller:list');
         $deploy_routing->post('/{environment}', 'Ansiployer\\Controller\\DeployController::make');
 
         return $deploy_routing;

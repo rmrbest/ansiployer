@@ -4,7 +4,7 @@
   become: yes
   become_user: root
   roles:
-    - kei-yamazaki.docker
+    - dschep.docker
   tasks:
     - name: stop nginx
       service: name=nginx state=stopped

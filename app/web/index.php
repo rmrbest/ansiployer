@@ -1,14 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+$app = require('../app_config/app.php');
 
-require_once '../vendor/autoload.php';
 use Ansiployer\Controller\Provider\Deploy;
-
-$app = new Silex\Application();
-$app['debug'] = true;
-
 $app->mount('/deploy', new Deploy());
 
 $app->get('/', function() {
