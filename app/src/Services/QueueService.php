@@ -5,6 +5,7 @@ namespace Ansiployer\Services;
 
 
 use Ansiployer\Services\Queue\IQueueStrategy;
+use Ansiployer\Services\Queue\SimpleStringQueueMessage;
 
 class QueueService
 {
@@ -15,9 +16,9 @@ class QueueService
         $this->strategy = $strategy;
     }
 
-    public function produce()
+    public function produce(string $environment, string $version)
     {
-        return $this->strategy->produce();
+        return $this->strategy->produce($environment, new SimpleStringQueueMessage($version));
     }
 
     public function consume()

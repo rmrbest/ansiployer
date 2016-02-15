@@ -4,7 +4,8 @@
   become: yes
   become_user: root
   roles:
-    - dschep.docker
+    - kbrebanov.docker
+    - tersmitten.composer
   tasks:
     - name: stop nginx
       service: name=nginx state=stopped

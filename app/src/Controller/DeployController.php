@@ -1,34 +1,24 @@
 <?php
 namespace Ansiployer\Controller;
 
-use PhpAmqpLib\Connection\AMQPConnection;
-use PhpAmqpLib\Message\AMQPMessage;
+use Ansiployer\Services\QueueService;
 
 class DeployController
 {
-    private $queueConnection;
+    private $queueService;
 
-    public function __construct(AMQPConnection $queueConnection)
+    public function __construct(QueueService $queueService)
     {
-        $this->queueConnection = $queueConnection;
+        $this->queueService = $queueService;
     }
 
     public function list()
     {
-        $channel = $this->queueConnection->channel();
-        $channel->queue_declare('deploy_queue', false, true, false, false);
-        $now = new \DateTime();
-
-        $msg = new AMQPMessage($now->format('YmdHis'), ['delivery_mode'=> 2]);
-        $channel->basic_publish($msg, '', 'deploy_queue');
-        $channel->close();
-        $this->queueConnection->close();
         return 'esto es la lista';
     }
 
-    public function make(string $environment)
+    public function make(string $environment, string $version = 'master')
     {
-
-        return 'estoy deployando';
+        $this->queueService->produce($environment, $version);
     }
 }

@@ -10,7 +10,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Ansiployer\\": "src/"
+            "Ansiployer\\": "src/",
+            "tests\\": "tests/"
         }
     }
 }
