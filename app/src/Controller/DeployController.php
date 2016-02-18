@@ -30,7 +30,7 @@ class DeployController
     public function actionList()
     {
         return 'List of available methods
-    - /deploy/{environment} - triggers a deploy to the given environment';
+    - POST /deploy/ - triggers a deploy to the given environment';
 
     }
 }

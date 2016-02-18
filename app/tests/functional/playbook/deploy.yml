@@ -1,0 +1,6 @@
+---
+- name: Test deployment
+  hosts: localhost
+  tasks:
+    - name: Hello server
+      shell: echo "test" >> /tmp/deploytest.txt

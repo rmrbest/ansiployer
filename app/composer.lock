@@ -4,9 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "337c52cff6f2c6f03a56ebdc729cf4e4",
-    "content-hash": "86ff321b8ddee51b9ffb181921461a0b",
+    "hash": "9eca99ba8ec1d4006e41be50fa2cb01f",
+    "content-hash": "8d8df78c73ed9b563b6628acefd4b61e",
     "packages": [
+        {
+            "name": "adambrett/shell-wrapper",
+            "version": "0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adambrett/php-shell-wrapper.git",
+                "reference": "1526fbbb6756843440fc074dc1118df714ad0eb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adambrett/php-shell-wrapper/zipball/1526fbbb6756843440fc074dc1118df714ad0eb3",
+                "reference": "1526fbbb6756843440fc074dc1118df714ad0eb3",
+                "shasum": ""
+            },
+            "require-dev": {
+                "covex-nn/phpcb": "*@dev",
+                "fzaninotto/faker": "*@dev",
+                "mockery/mockery": "*@dev",
+                "pdepend/pdepend": "*@dev",
+                "phploc/phploc": "*@dev",
+                "phpmd/phpmd": "*@dev",
+                "phpunit/phpunit": "*@dev",
+                "sebastian/phpcpd": "*@dev",
+                "squizlabs/php_codesniffer": "*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AdamBrett\\ShellWrapper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BDS-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Brett",
+                    "email": "adam@adambrett.co.uk"
+                }
+            ],
+            "description": "An object oriented wrapper for shell commands",
+            "time": "2015-11-04 10:26:58"
+        },
         {
             "name": "ebichan/silex-amqp-provider",
             "version": "1.0.0",

@@ -3,8 +3,15 @@ $app = require(__DIR__.'/../app_config/app.php');
 
 $queue_strategy = $app['queue.strategy'];
 
+if(!isset($argv[1])) {
+    die('Usage = php deployer.php ENVIRONMENT');
+}
+
+$environment = $argv[1];
+
 /** @var \Ansiployer\Services\QueueService $queue_service */
 $queue_service = new \Ansiployer\Services\QueueService($queue_strategy);
+$deploy_service = new \Ansiployer\Services\DeployService($environment, '/playbook');
 
 while(true) {
     $message = $queue_service->consume();
@@ -12,10 +19,6 @@ while(true) {
         sleep(10);
         continue;
     } else {
-        if ($message === 'deploy_staging') {
-            echo 'deploying';
-        } else {
-            echo 'wrong message: '.$message;
-        }
+        $deploy_service->deploy($message);
     }
 }

@@ -36,11 +36,15 @@ class DeployControllerIntegrationTest extends IntegrationTestBase
     public function test_make_calledWithTextFileQueueStrategy_queueTheRequests()
     {
         $environment = 'busy';
+        $request_double = $this->prophesize('Symfony\Component\HttpFoundation\Request');
+        $request_double->get('environment')->willReturn($environment);
+        $request_double->get('version')->willReturn('master');
         $expected = "\"first job\"\n\"second job\"\n\"third job\"\n\"fourth job\"\n\"fifth job\"\n\"master\"\n\"master\"\n\"master\"\n";
         $sut = new DeployController(new QueueService(new TextfileQueueStrategy(self::FILE_FOLDER)));
-        $sut->make($environment);
-        $sut->make($environment);
-        $sut->make($environment);
+        $request = $request_double->reveal();
+        $sut->make($request);
+        $sut->make($request);
+        $sut->make($request);
         self::assertStringEqualsFile(self::FILE_FOLDER . '/' . $environment . '_queue', $expected);
     }
 }
