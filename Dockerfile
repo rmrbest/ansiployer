@@ -23,9 +23,13 @@ VOLUME /playbook
 RUN mkdir /code
 RUN chown -Rf www.www /code
 
+RUN mkdir /assets
+RUN chown -Rf www.www /assets
+
+RUN mkdir /logs
+RUN chown -Rf www.www /logs
 
 COPY ./app /data/www
-RUN chmod -R 755 /data/www/log
 RUN curl -sS https://getcomposer.org/installer | /usr/bin/php
 RUN mv composer.phar /usr/local/bin/composer
 RUN /usr/local/bin/composer install --working-dir=/data/www/

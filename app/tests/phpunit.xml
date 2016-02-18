@@ -21,6 +21,11 @@
             <directory>./unit/</directory>
             <directory>./integration/</directory>
         </testsuite>
+        <testsuite name="unit+integration+functional">
+            <directory>./unit/</directory>
+            <directory>./integration/</directory>
+            <directory>./functional/</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

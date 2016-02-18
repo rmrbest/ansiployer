@@ -3,7 +3,8 @@
         "silex/silex": "^1.3",
         "ebichan/silex-amqp-provider": "^1.0",
         "predis/service-provider": "^1.0",
-        "monolog/monolog": "^1.17"
+        "monolog/monolog": "^1.17",
+        "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.2"
