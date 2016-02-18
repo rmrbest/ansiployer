@@ -32,8 +32,7 @@ RUN chown -Rf www.www /logs
 COPY ./app /data/www
 RUN curl -sS https://getcomposer.org/installer | /usr/bin/php
 RUN mv composer.phar /usr/local/bin/composer
-RUN /usr/local/bin/composer install --working-dir=/data/www/
-
+RUN /usr/local/bin/composer install --no-dev --working-dir=/data/www
 
 COPY docker_config/nginx.conf /usr/local/nginx/conf/nginx.conf
 COPY docker_config/supervisord.conf /etc/supervisord.conf
