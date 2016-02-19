@@ -1,8 +1,6 @@
 <?php
 $app = require(__DIR__.'/../app_config/app.php');
 
-$queue_strategy = $app['queue.strategy'];
-
 if(!isset($argv[1])) {
     die('Usage = php deployer.php ENVIRONMENT');
 }
