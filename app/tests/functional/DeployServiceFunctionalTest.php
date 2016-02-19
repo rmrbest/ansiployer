@@ -23,8 +23,8 @@ class DeployServiceFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_deploy_called_installRequirementsAndDeploy()
     {
         $sut = new DeployService('staging', __DIR__.'/playbook');
-        $sut->deploy('master', '-p /tmp/roles');
-        self::assertStringEqualsFile('/tmp/deploytest.txt', "test\n");
+        $sut->deploy('master', ' -p /tmp/roles');
         self::assertFileExists('/tmp/roles/kbrebanov.docker');
+        self::assertStringEqualsFile('/tmp/deploytest.txt', "test\n");
     }
 }

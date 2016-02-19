@@ -1,0 +1,6 @@
+Vagrantfile
+entercontainer.sh
+runcontainer.sh
+testcontainer.sh
+vagrant_config
+.vagrant

@@ -5,12 +5,7 @@ MAINTAINER Antonio Hernández "antonio.hernandez@panamedia.net"
 RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm && \
     rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm && \
     yum -y update && \
-    yum -y install ansible && \
-    yum -y install php70w-xml && \
-    yum -y install php70w-bcmath && \
-    yum -y install php70w-mbstring && \
-    yum -y install php70w-cli && \
-    yum -y install rabbitmq-server
+    yum -y install ansible php70w-xml php70w-bcmath php70w-mbstring php70w-cli rabbitmq-server git
 
 #Install ansistrano
 COPY docker_config/ansible.cfg /etc/ansible/ansible.cfg
@@ -29,12 +24,17 @@ RUN chown -Rf www.www /assets
 RUN mkdir /logs
 RUN chown -Rf www.www /logs
 
-COPY ./app /data/www
 RUN curl -sS https://getcomposer.org/installer | /usr/bin/php
 RUN mv composer.phar /usr/local/bin/composer
-RUN /usr/local/bin/composer install --no-dev --working-dir=/data/www
+
+COPY ./app /app
+RUN /usr/local/bin/composer install --no-dev --no-progress --no-interaction --verbose --working-dir=/app
+RUN chown -Rf www.www /app
+
+#RUN mv /data/www2/* /data/www/
+#RUN rm -rf /data/www2/
 
 COPY docker_config/nginx.conf /usr/local/nginx/conf/nginx.conf
 COPY docker_config/supervisord.conf /etc/supervisord.conf
 
-WORKDIR /data/www
+WORKDIR /app

@@ -18,7 +18,9 @@ class DeployService
 
     public function deploy(string $version, string $rolespath='')
     {
-        $this->exec->run(new Command('ansible-galaxy install -r '.$this->playbookFolder.'/requirements.yml '.$rolespath));
-        $this->exec->run(new Command("ansible-playbook -i {$this->playbookFolder}/{$this->environment} {$this->playbookFolder}/deploy.yml"));
+        $install_command = 'ansible-galaxy install -r ' . $this->playbookFolder . '/requirements.yml' . $rolespath;
+        $deploy_command = "ansible-playbook -i {$this->playbookFolder}/{$this->environment} {$this->playbookFolder}/deploy.yml";
+        $this->exec->run(new Command($install_command));
+        $this->exec->run(new Command($deploy_command));
     }
 }
