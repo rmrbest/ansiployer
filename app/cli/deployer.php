@@ -10,7 +10,7 @@ if(!isset($argv[1])) {
 $environment = $argv[1];
 
 /** @var \Ansiployer\Services\QueueService $queue_service */
-$queue_service = new \Ansiployer\Services\QueueService($queue_strategy);
+$queue_service = $app['queue.service'];
 $deploy_service = new \Ansiployer\Services\DeployService($environment, '/playbook');
 
 while(true) {
