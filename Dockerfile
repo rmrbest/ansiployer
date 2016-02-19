@@ -27,7 +27,7 @@ RUN chown -Rf www.www /logs
 RUN curl -sS https://getcomposer.org/installer | /usr/bin/php
 RUN mv composer.phar /usr/local/bin/composer
 
-COPY ./app /app
+ADD ./app /app
 RUN /usr/local/bin/composer install --no-dev --no-progress --no-interaction --verbose --working-dir=/app
 RUN chown -Rf www.www /app
 
