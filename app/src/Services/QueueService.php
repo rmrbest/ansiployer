@@ -21,8 +21,8 @@ class QueueService
         return $this->strategy->produce($environment, new SimpleStringQueueMessage($version));
     }
 
-    public function consume()
+    public function consume(string $environment)
     {
-        return $this->strategy->consume();
+        return $this->strategy->consume($environment);
     }
 }

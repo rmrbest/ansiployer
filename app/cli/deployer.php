@@ -12,7 +12,7 @@ $queue_service = $app['queue.service'];
 $deploy_service = new \Ansiployer\Services\DeployService($environment, '/playbook');
 
 while(true) {
-    $message = $queue_service->consume();
+    $message = $queue_service->consume($environment);
     if (null === $message) {
         sleep(10);
         continue;
