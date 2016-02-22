@@ -23,27 +23,31 @@ class TextfileQueueStrategy implements IQueueStrategy
     {
         $filename = $this->assetsFolder . '/' . $name . '_queue';
         $firstline = false;
-        $fp = $this->openAndGetLock($filename, 'c+');
-        $offset = 0;
-        $len = filesize($filename);
-        while (($line = fgets($fp)) !== false) {
-            if (!$firstline) {
-                $firstline = $line;
-                $offset = strlen($firstline);
-                continue;
-            }
-            $pos = ftell($fp);
-            fseek($fp, $pos-strlen($line)-$offset);
-            fwrite($fp, $line);
-            fseek($fp, $pos);
-        }
-        fflush($fp);
-        ftruncate($fp, $len-$offset);
-        $this->unlockAndClose($fp);
-        if (false === $firstline) {
+        if (!file_exists($filename)) {
             return null;
         } else {
-            return json_decode(str_replace("\n", '', $firstline));
+            $fp = $this->openAndGetLock($filename, 'c+');
+            $offset = 0;
+            $len = filesize($filename);
+            while (($line = fgets($fp)) !== false) {
+                if (!$firstline) {
+                    $firstline = $line;
+                    $offset = strlen($firstline);
+                    continue;
+                }
+                $pos = ftell($fp);
+                fseek($fp, $pos-strlen($line)-$offset);
+                fwrite($fp, $line);
+                fseek($fp, $pos);
+            }
+            fflush($fp);
+            ftruncate($fp, $len-$offset);
+            $this->unlockAndClose($fp);
+            if (false === $firstline) {
+                return null;
+            } else {
+                return json_decode(str_replace("\n", '', $firstline));
+            }
         }
     }
 
