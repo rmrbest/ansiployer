@@ -2,7 +2,7 @@ FROM skiychan/nginx-php7
 MAINTAINER Antonio Hernández "antonio.hernandez@panamedia.net"
 
 #Install ansible & php-cli & rabbitmq-server
-RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm && \
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm && \
     rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm && \
     yum -y update && \
     yum -y install python-pip python-devel php70w-xml php70w-bcmath php70w-mbstring php70w-cli rabbitmq-server git sudo bzip2
