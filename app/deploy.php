@@ -9,6 +9,7 @@
 //    fclose($file);
 //}
 $environment = isset($_GET['env']) ? $_GET['env'] : 'staging';
+$version = isset($_GET['version']) ? $_GET['version'] : 'master';
 
 $pidroles = 'roles.pid';
 $piddeploy = 'deploy.pid';
@@ -22,7 +23,7 @@ if (!isRunning($piddeploy) && !isRunning($pidroles)) {
         echo 'waiting';
         ob_flush();
     }
-    deploy($environment, $log_file, $piddeploy);
+    deploy($environment, $version, $log_file, $piddeploy);
 } else {
     echo "already running";
 }
@@ -33,9 +34,9 @@ function installRoles($logFile, $pidFile)
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
 }
 
-function deploy($environment, $logFile, $pidFile)
+function deploy($environment, $version, $logFile, $pidFile)
 {
-    $cmd = "ansible-playbook -i /playbook/$environment /playbook/deploy.yml &";
+    $cmd = "ansible-playbook -i /playbook/$environment -e "version={$version}" /playbook/deploy.yml &";
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
 }
 
