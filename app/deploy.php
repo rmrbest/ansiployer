@@ -36,7 +36,7 @@ function installRoles($logFile, $pidFile)
 
 function deploy($environment, $version, $logFile, $pidFile)
 {
-    $cmd = "ansible-playbook -i /playbook/$environment -e "version={$version}" /playbook/deploy.yml &";
+    $cmd = "ansible-playbook -i /playbook/$environment -e "version=$version" /playbook/deploy.yml &";
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $logFile, $pidFile));
 }
 
