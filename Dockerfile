@@ -9,7 +9,7 @@ RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.n
 
 RUN pip install --upgrade pip
 RUN easy_install pip
-RUN yum install ansible #pip install ansible
+RUN pip install --upgrade ansible
 RUN pip install setuptools --no-use-wheel --upgrade
 RUN pip install boto
 
