@@ -8,7 +8,7 @@ RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.n
     yum -y install libffi libffi-devel python-pip python-devel php70w-xml php70w-bcmath php70w-mbstring php70w-cli rabbitmq-server git sudo bzip2
 
 RUN pip install --upgrade pip
-RUN pip install ansible==2.0.2.0
+RUN pip install ansible
 RUN pip install setuptools --no-use-wheel --upgrade
 RUN pip install boto
 
